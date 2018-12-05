@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Button from '@material-ui/core/Button';
+
 
 class App extends Component {
   state = {
@@ -17,14 +17,15 @@ class App extends Component {
       newtodo: ""
     })
   }
-  delete = e => {
+  delete = index => {
     this.setState({
-      todos: [...this.state.todos.slice(0, e.target.value), ...this.state.todos.slice(e.target.value + 1)]
+      todos: [...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1)]
     })
   }
+ 
   render() {
     const todos = this.state.todos.map((todo, index) => {
-      return (<li key={index}>{todo}<button value={index} onClick={this.delete}>x</button></li>)
+      return (<li key={index}>{todo}<Button onClick={() => this.delete(index)}>x</Button></li>)
     })
     return (
       <div className="App">
@@ -34,7 +35,7 @@ class App extends Component {
          </ul>
           <form onSubmit={this.onSubmit}>
             <input value={this.state.newtodo} onChange={this.onChange}/>
-            <button type="submit">Submit</button>
+            <Button type="submit" color="primary">Submit</Button>
           </form>
         </header>
       </div>
@@ -43,3 +44,4 @@ class App extends Component {
 }
 
 export default App;
+
